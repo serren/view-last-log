@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/pluginIcon.png</param>
+		<param name="plugin-logo">images/pluginLogo.png</param>
+	</plugin-info>
+
+	<resource type="i18n" name="i18n" location="viewLastLog" />
+
+	<web-resource key="viewLastLog-web-resources"
+		i18n-name-key="com.atlassian.jira.plugins.viewlastlog.general.resources">
+		<dependency>com.atlassian.auiplugin:ajs</dependency>
+		<transformation extension="js">
+			<transformer key="jsI18n" />
+		</transformation>
+		<resource type="download" name="viewLastLog.js" location="/js/viewLastLog.js" />
+		<resource type="download" name="images/" location="/images" />
+		<context>viewLastLog</context>
+	</web-resource>
+
+	<web-section key="viewLastLog-webSection" location="admin_plugins_menu"
+		i18n-name-key="com.atlassian.jira.plugins.viewlastlog.general.webSection"
+		weight="110">
+		<condition
+			class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+			<param name="permission">admin</param>
+		</condition>
+		<label
+			key="com.atlassian.jira.plugins.viewlastlog.general.webSection.label" />
+	</web-section>
+
+	<web-item key="viewLastLog-menu-item"
+		i18n-name-key="com.atlassian.jira.plugins.viewlastlog.general.menu-item"
+		weight="10" application="jira" section="admin_plugins_menu/viewLastLog-webSection">
+		<condition
+			class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+			<param name="permission">admin</param>
+		</condition>
+		<label key="com.atlassian.jira.plugins.viewlastlog.general.webitem.label" />
+		<link linkId="com.atlassian.jira.plugins.viewlastlog.admin.webitem.link">/plugins/servlet/viewLastLog/view!default.jspa</link>
+	</web-item>
+
+	<component-import key="velocityTemplateRenderer" name="Template renderer"
+		interface="com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer" />
+	<component-import key="applicationProperties"
+		interface="com.atlassian.sal.api.ApplicationProperties" />
+	<component-import key="userManager"
+		interface="com.atlassian.sal.api.user.UserManager" />
+	<component-import key="loginUriProvider"
+		interface="com.atlassian.sal.api.auth.LoginUriProvider" />
+
+	<servlet name="View Last Log Servlet"
+		i18n-name-key="com.atlassian.jira.plugins.viewlastlog.general.servlet"
+		key="viewLastLog-servlet"
+		class="com.atlassian.jira.plugins.viewlastlog.servlet.ViewLastLogServlet">
+		<condition
+			class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+			<param name="permission">admin</param>
+		</condition>
+		<url-pattern>/viewLastLog/view!default.jspa</url-pattern>
+	</servlet>
+
+</atlassian-plugin>

@@ -1,0 +1,59 @@
+<html>
+	<head>
+	    <title>$i18n.getText("com.atlassian.jira.plugins.viewlastlog.general.plugin.name")</title>
+	    <meta name="decorator" content="atl.admin" />
+		<meta name="admin.active.section" content="admin_plugins_menu/viewLastLog-webSection">
+		<meta name="admin.active.tab" content="com.atlassian.jira.plugins.viewlastlog.admin.webitem.link" >
+		<meta name="application-base-url" content="$applicationProperties.getBaseUrl()">
+		$webResourceManager.requireResource("com.atlassian.jira.plugins.viewlastlog.view-last-log:viewLastLog-web-resources")
+	</head>
+	<body>
+		<h2>$i18n.getText("com.atlassian.jira.plugins.viewlastlog.general.plugin.name")</h2>		
+		#if ($error != true)
+			<form action="" method="GET" class="aui">			
+				<input type="hidden" name="atl_token" value="$atl_token">
+				<table cellpadding="7px">			
+					<tr>
+						<td width="150px"><label for="maxEntries">$i18n.getText("com.atlassian.jira.plugins.viewlastlog.gui.showEntries")</label></td>
+						<td><input class="text" type="text" maxlength="4" style="width:50px;margin-right:10px;" id="maxEntries" name="maxEntries" value="${maxEntries}" /></td>
+					</tr>
+					<tr>
+						<td><label for="query">$i18n.getText("com.atlassian.jira.plugins.viewlastlog.gui.filterString")</label></td>
+						<td><input class="text"  type="text" maxlength="50" style="margin-right:10px;" id="query" value="${query}" name="query"/></td>
+					</tr>
+					<tr>
+						<td valign="top"><label for="logFiles">$i18n.getText("com.atlassian.jira.plugins.viewlastlog.gui.logFile")</label></td>				
+						<td>
+							<fieldset id="logFiles" name="logFiles" class="aui-navgroup">
+								#foreach ($item in $logFiles)
+									<div class="radio">
+										<input class="radio" type="radio" id="$item" name="logFile" value="$item" #if ($item == $logFile) checked="checked"	#end />
+										<label for="$item">$item</label>
+									</div>	
+				            	#end					
+							</fieldset>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input class="button" type="submit" id="show" name="show" value="$i18n.getText("com.atlassian.jira.plugins.viewlastlog.gui.show")"/>
+							#if ($log.size() > 0)
+								<input	class="button" type="button" id="download" name="download" value="$i18n.getText("com.atlassian.jira.plugins.viewlastlog.gui.download")" onclick="download();"/>
+							#end
+						</td>						
+					</tr>
+				</table>
+			</form>
+			<br/>
+			<div id="logItems">
+<pre>
+#foreach ($entry in $log)
+$entry
+#end
+</pre>				
+			</div>
+		#else
+			$errorMessage
+		#end
+	</body>
+</html>
