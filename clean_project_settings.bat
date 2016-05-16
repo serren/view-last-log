@@ -1,0 +1,2 @@
+atlas-mvn clean
+pause
