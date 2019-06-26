@@ -44,7 +44,7 @@ public class ViewLastLogServlet extends HttpServlet {
     private final String JIRA_VIEW_LOG_USERS = "jira-view-log-users";
     private final String CONTENT_TYPE = "text/html;charset=utf-8";
     private final int MAX_ENTRIES = 50;
-    private final int JIRA_MAX_VERSION = 7;
+    private final int JIRA_MAX_VERSION = 8;
 
     private final UserManager userManager;
     private final LoginUriProvider loginUriProvider;
