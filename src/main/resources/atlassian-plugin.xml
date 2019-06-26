@@ -4,7 +4,15 @@
 	name="${project.name}" plugins-version="2">
 
 	<plugin-info>
-		<description>${project.description}</description>
+		<description>
+			&lt;p&gt;View Last Log plugin for Atlassian JIRA.&lt;/p&gt;
+			&lt;p&gt;How to use:&lt;br&gt;&lt;/br&gt;
+			&lt;ul&gt;
+			&lt;li&gt;Create jira-view-log-users group and add users here.&lt;/li&gt;
+			&lt;li&gt;Navigate to JIRA_URL/plugins/servlet/viewLastLog/view!default.jpsa.&lt;/li&gt;
+			&lt;/ul&gt;
+			&lt;/p&gt;
+        </description>	
 		<version>${project.version}</version>
 		<vendor name="${project.organization.name}" url="${project.organization.url}" />
 		<param name="plugin-icon">images/pluginIcon.png</param>
