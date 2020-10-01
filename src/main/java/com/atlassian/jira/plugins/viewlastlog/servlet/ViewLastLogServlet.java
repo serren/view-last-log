@@ -109,7 +109,7 @@ public class ViewLastLogServlet extends HttpServlet {
             if (log.isDebugEnabled())
                 log.debug((new StringBuilder()).append("MaxEntriesParam: ")
                         .append(maxEntriesParam).toString());
-            if (maxEntriesParam != null) {
+            if (StringUtils.isNotBlank(maxEntriesParam)) {
                 maxEntires = Integer.parseInt(maxEntriesParam);
                 if (maxEntires < 0) {
                     throw new IllegalArgumentException(

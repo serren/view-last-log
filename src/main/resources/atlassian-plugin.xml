@@ -62,6 +62,8 @@
 		interface="com.atlassian.sal.api.user.UserManager" />
 	<component-import key="loginUriProvider"
 		interface="com.atlassian.sal.api.auth.LoginUriProvider" />
+	<component-import key="globalPermissionManager"
+		interface="com.atlassian.jira.security.GlobalPermissionManager" />		
 
 	<servlet name="View Last Log Servlet"
 		i18n-name-key="com.atlassian.jira.plugins.viewlastlog.general.servlet"
